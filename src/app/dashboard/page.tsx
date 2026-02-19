@@ -98,7 +98,7 @@ export default function DashboardPage() {
             <ChevronRight className="w-4 h-4 text-surface-500 group-hover:text-brand-400 transition-colors" />
           </div>
           <div className="text-2xl md:text-3xl font-bold text-white">
-            {user?.totalPoints ?? earnings?.summary?.totalPoints ?? 0}
+            {user?.totalPoints ?? earnings?.totalPoints ?? 0}
           </div>
           <div className="text-sm text-surface-400 mt-1">SOUL Points</div>
           <div className="text-xs text-brand-400 mt-2">View earnings →</div>
@@ -109,7 +109,7 @@ export default function DashboardPage() {
             <TrendingUp className="w-6 h-6 text-green-400" />
           </div>
           <div className="text-2xl md:text-3xl font-bold text-white">
-            ${(user?.totalEarnings ?? earnings?.summary?.totalEarnings ?? 0).toFixed(2)}
+            ${(user?.totalEarnings ?? earnings?.totalEarnings ?? 0).toFixed(2)}
           </div>
           <div className="text-sm text-surface-400 mt-1">Total Earnings</div>
         </div>

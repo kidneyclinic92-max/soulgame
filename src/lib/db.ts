@@ -35,7 +35,7 @@ export async function getPool(): Promise<sql.ConnectionPool> {
 /**
  * Execute a parameterized query and return records.
  */
-export async function query<T = sql.RecordSet>(
+export async function query<T = unknown[]>(
   queryText: string,
   params?: Record<string, unknown>
 ): Promise<T> {
@@ -63,7 +63,7 @@ export async function query<T = sql.RecordSet>(
 /**
  * Execute a query and return the first record or null.
  */
-export async function queryOne<T = sql.RecordSet>(
+export async function queryOne<T = unknown>(
   queryText: string,
   params?: Record<string, unknown>
 ): Promise<T | null> {

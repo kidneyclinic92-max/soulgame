@@ -30,7 +30,8 @@ export async function GET(request: NextRequest) {
     );
     const total = countResult?.total ?? 0;
 
-    const withGame = (tournaments ?? []).map((t: Record<string, unknown>) => ({
+    const list = (tournaments ?? []) as Record<string, unknown>[];
+    const withGame = list.map((t) => ({
       ...t,
       game: { name: t.gameName, genre: t.gameGenre },
     }));

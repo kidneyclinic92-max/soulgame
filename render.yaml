@@ -1,0 +1,20 @@
+# Render Blueprint - Soul Gaming
+# Deploy from dashboard: https://dashboard.render.com/blueprints
+# Or connect repo and use these settings manually
+
+services:
+  - type: web
+    name: soulgame
+    runtime: node
+    region: oregon  # or frankfurt, singapore
+
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      # Add the rest in Render Dashboard → Environment:
+      # AZURE_SQL_SERVER, AZURE_SQL_DATABASE, AZURE_SQL_USER, AZURE_SQL_PASSWORD,
+      # AZURE_SQL_TRUST_CERTIFICATE, AZURE_SQL_PORT (optional, default 1433),
+      # JWT_SECRET, NEXT_PUBLIC_REOWN_PROJECT_ID
