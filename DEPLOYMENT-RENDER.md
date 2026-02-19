@@ -54,18 +54,14 @@ git push -u origin main
 - **Build:** `npm install && npm run build`  
   - Installs dependencies and runs `next build` + `postbuild` (copies static/public into standalone).
 - **Start:** `npm start`  
-  - Runs `node .next/standalone/server.js` (standalone Next.js server).
-- Render sets `PORT`; the app uses it automatically.
+  - Runs `scripts/start-standalone.mjs`, which starts the Next.js standalone server from `.next/standalone` with `HOSTNAME=0.0.0.0` so Render’s proxy can connect.
+- Render sets `PORT`; the app uses it. Set **HOSTNAME** = `0.0.0.0` in Environment if needed.
 
-## 4. If the app fails to start
+## 4. If you get HTTP 502
 
-If you see errors about missing files or wrong paths, set **Start Command** to:
-
-```bash
-cd .next/standalone && node server.js
-```
-
-Then save and redeploy.
+- Ensure **Start Command** is `npm start` (uses the script that binds to 0.0.0.0).
+- In Render → **Environment**, add **HOSTNAME** = `0.0.0.0` (optional; the start script sets it by default).
+- In **Settings** → **Health Check**, set **Initial delay** to at least **30 seconds** so the server has time to start before the first check.
 
 ## 5. Custom domain (optional)
 
