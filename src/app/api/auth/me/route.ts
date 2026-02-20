@@ -3,6 +3,8 @@ import { queryOne } from "@/lib/db";
 import { verifyToken, extractToken } from "@/lib/auth";
 import { successResponse, errorResponse } from "@/lib/api-utils";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   try {
     const authHeader = request.headers.get("authorization");

@@ -3,6 +3,8 @@ import { query, queryOne, execute, newId } from "@/lib/db";
 import { verifyToken, extractToken } from "@/lib/auth";
 import { successResponse, errorResponse, validateFields } from "@/lib/api-utils";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

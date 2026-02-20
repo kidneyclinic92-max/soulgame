@@ -3,6 +3,8 @@ import { getAuthUser } from "@/lib/get-auth-user";
 import { query, queryOne } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/api-utils";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   try {
     const user = await getAuthUser(request);

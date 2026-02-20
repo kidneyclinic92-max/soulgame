@@ -6,7 +6,7 @@
     "dev": "next dev -H 0.0.0.0 -p ${PORT:-3000}",
     "build": "next build",
     "postbuild": "node scripts/copy-standalone.mjs",
-    "start": "node scripts/start-standalone.mjs",
+    "start": "cd .next/standalone && node server.js",
     "lint": "next lint"
   },
   "dependencies": {

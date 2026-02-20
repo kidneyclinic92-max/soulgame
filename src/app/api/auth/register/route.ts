@@ -3,6 +3,8 @@ import { queryOne, execute, newId } from "@/lib/db";
 import { hashPassword, generateToken } from "@/lib/auth";
 import { successResponse, errorResponse, validateFields, isValidEmail } from "@/lib/api-utils";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
