@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const NFT_IMAGES = [
-  "/assets/own-future-nft-1.jpg",
-  "/assets/own-future-nft-2.jpg",
-  "/assets/own-future-nft-3.jpg",
-  "/assets/own-future-nft-4.jpg",
+  "/assets/nft1.png",
+  "/assets/nft2.png",
+  "/assets/nft3.png",
+  "/assets/nft4.png",
 ];
 
 function NftCard({ src, alt }: { src: string; alt: string }) {
@@ -35,9 +36,18 @@ function NftCard({ src, alt }: { src: string; alt: string }) {
 export default function OwnFutureNftSection() {
   return (
     <section id="future-nft" className="relative py-20 md:py-28 overflow-hidden">
-      {/* Dark industrial-style background */}
-      <div className="absolute inset-0 bg-surface-950" aria-hidden />
-      <div className="absolute inset-0 bg-gradient-to-b from-surface-950 via-surface-900/40 to-surface-950" aria-hidden />
+      {/* Background image */}
+      <div className="absolute inset-0" aria-hidden>
+        <Image
+          src="/assets/nft.png"
+          alt=""
+          fill
+          className="object-cover opacity-40"
+          priority={false}
+        />
+      </div>
+      <div className="absolute inset-0 bg-surface-950/70" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-b from-surface-950 via-surface-900/50 to-surface-950" aria-hidden />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_80%,rgba(124,58,237,0.08),transparent)]" aria-hidden />
 
       <div className="container-custom relative z-10">

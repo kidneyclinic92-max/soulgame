@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 
 const VIDEO_SRC = "/assets/video5.mp4";
 
@@ -37,7 +38,17 @@ export default function CraftCollectSection() {
       id="craft-collect"
       className="relative py-20 md:py-28 bg-surface-950 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-surface-950/95 via-surface-900/20 to-surface-950" aria-hidden />
+      {/* Background image */}
+      <div className="absolute inset-0" aria-hidden>
+        <Image
+          src="/assets/collectncraft.png"
+          alt=""
+          fill
+          className="object-cover opacity-40"
+          priority={false}
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-surface-950/95 via-surface-900/50 to-surface-950" aria-hidden />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_80%_50%,rgba(124,58,237,0.06),transparent)]" aria-hidden />
 
       <div className="container-custom relative z-10">

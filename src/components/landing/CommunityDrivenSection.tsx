@@ -1,10 +1,21 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CommunityDrivenSection() {
   return (
     <section id="community-driven" className="relative py-20 md:py-28 bg-surface-950 overflow-hidden">
-      {/* Optional: dark industrial-style gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-surface-950/95 via-surface-900/30 to-surface-950" aria-hidden />
+      {/* Background image */}
+      <div className="absolute inset-0" aria-hidden>
+        <Image
+          src="/assets/community.png"
+          alt=""
+          fill
+          className="object-cover opacity-40"
+          priority={false}
+        />
+      </div>
+      {/* Gradient overlays for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-surface-950/95 via-surface-900/50 to-surface-950" aria-hidden />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(124,58,237,0.08),transparent)]" aria-hidden />
 
       <div className="container-custom relative z-10">
