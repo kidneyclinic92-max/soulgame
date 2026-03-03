@@ -63,9 +63,14 @@ The app uses Next.js **standalone** output: after `npm run build`, a minimal ser
 In Azure Portal: **App Service** → **Configuration** → **General settings** (or **Settings** → **Configuration**):
 
 - **Stack settings**
-  - **Startup Command** (Linux):  
-    `node .next/standalone/server.js`  
-  - Or leave empty and rely on `npm start` (see below).
+  - **Startup Command** (Linux): use one of the following so npm runs from the app directory (fixes `ENOENT: no such file or directory, open '/package.json'`):
+    - **Option 1 (recommended):**  
+      `cd /home/site/wwwroot && npm install && npm run build && npm start`
+    - **Option 2 (if build runs elsewhere):**  
+      `cd /home/site/wwwroot && npm start`
+    - **Option 3 (use script):**  
+      `bash /home/site/wwwroot/scripts/azure-start.sh`
+  - Do **not** leave startup command empty if you see errors about `/package.json` — Azure may run npm with the wrong working directory.
 
 Your `package.json` already has:
 
