@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p ${PORT:-3000}",
-    "build": "next build",
+    "build": "node node_modules/next/dist/bin/next build",
     "postbuild": "node scripts/copy-standalone.mjs",
     "start": "cd .next/standalone && HOSTNAME=0.0.0.0 node server.js",
     "lint": "next lint"

@@ -60,32 +60,43 @@ Do **not** commit real values to git. Set them only in Azure (and in local `.env
 
 The app uses Next.js **standalone** output: after `npm run build`, a minimal server is in `.next/standalone`. Azure should run that server.
 
-In Azure Portal: **App Service** → **Configuration** → **General settings** (or **Settings** → **Configuration**):
+### Why the app fails on Azure (but works on Render)
 
-- **Stack settings**
-  - **Startup Command** (Linux): use one of the following so npm runs from the app directory (fixes `ENOENT: no such file or directory, open '/package.json'`):
-    - **Option 1 (recommended):**  
-      `cd /home/site/wwwroot && npm install && npm run build && npm start`
-    - **Option 2 (if build runs elsewhere):**  
-      `cd /home/site/wwwroot && npm start`
-    - **Option 3 (use script):**  
-      `bash /home/site/wwwroot/scripts/azure-start.sh`
-  - Do **not** leave startup command empty if you see errors about `/package.json` — Azure may run npm with the wrong working directory.
+- **ENOENT `/package.json`**: Azure’s startup script can run with the wrong working directory (e.g. `/`). You must run from the app root.
+- **`next: not found`**: With Oryx, `node_modules` is extracted from a tar to `/node_modules` and the `node_modules/.bin` symlinks can be broken, so the `next` binary is not found when running `npm run build`. The project’s `build` script calls the Next.js entrypoint directly (`node node_modules/next/dist/bin/next build`) so the build works even when `.bin` symlinks are broken.
 
-Your `package.json` already has:
+### Startup Command (required)
 
-- `build`: `next build` (then `postbuild` copies static/public into standalone).
-- `start`: `node .next/standalone/server.js`
+In Azure Portal: **App Service** → **Configuration** → **General settings** → **Startup Command**.
 
-So if Azure runs **Build**: `npm run build` and **Start**: `npm start`, it will use the standalone server. Azure App Service usually runs `npm start` by default after a build.
+Use **exactly** one of these (copy-paste; the `cd` fixes the wrong working directory):
+
+- **If the build runs at startup (default for many setups):**  
+  `cd /home/site/wwwroot && npm run build && npm start`
+
+- **If the build already ran during deployment (e.g. GitHub Actions or Oryx build):**  
+  `cd /home/site/wwwroot && npm start`
+
+- **Optional script:**  
+  `bash /home/site/wwwroot/scripts/azure-start.sh`
+
+Important:
+
+- Use `&&` between commands (not a space). Wrong: `npm run build npm start` (causes ENOENT). Right: `npm run build && npm start`.
+- Do **not** leave Startup Command empty if you see errors about `/package.json`.
+
+Your `package.json` has:
+
+- `build`: runs Next.js build via its direct path (then `postbuild` copies static/public into standalone).
+- `start`: `cd .next/standalone && HOSTNAME=0.0.0 node server.js`
 
 ### If you use “Run from package” or zip deploy
 
 Ensure the deployment runs:
 
-1. `npm install --production=false` (or `npm ci`) so devDependencies are available for `next build`.
+1. `npm install --production=false` (or `npm ci`) so dependencies needed for `next build` are available.
 2. `npm run build` (this runs `postbuild` and fills `.next/standalone`).
-3. Start with: `node .next/standalone/server.js` (or `npm start`).
+3. Start with: `cd .next/standalone && HOSTNAME=0.0.0 node server.js` (or `npm start`).
 
 Port: Azure sets `PORT`; the Next.js standalone server uses it automatically.
 
@@ -142,6 +153,8 @@ In **Deployment Center**, choose **Local Git** or **Azure Repos**. Push to the g
 
 ## Troubleshooting
 
+- **ENOENT `/package.json`:** Startup ran with the wrong working directory. Set Startup Command to exactly: `cd /home/site/wwwroot && npm run build && npm start` (use `&&`, not a space).
+- **`next: not found` or `sh: 1: next: not found`:** The project’s `build` script uses the Next.js entrypoint directly so this should be resolved. If you still see it, ensure Startup Command starts with `cd /home/site/wwwroot &&` and redeploy.
 - **Blank page / 500:** Check **Log stream** and **Application logs**. Often caused by missing env vars (e.g. `JWT_SECRET`, `AZURE_SQL_*`) or wrong **Startup Command**.
 - **Port:** The app uses `process.env.PORT`; Azure sets this automatically.
 - **Static files 404:** Ensure `postbuild` ran (copy of `.next/static` and `public` into `.next/standalone`). Re-run `npm run build` locally and confirm `.next/standalone/.next/static` and `.next/standalone/public` exist.
