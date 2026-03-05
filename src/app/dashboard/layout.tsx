@@ -2,8 +2,13 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { useUser } from "@/context/UserContext";
-import DashboardShell from "@/components/dashboard/DashboardShell";
+
+const DashboardShell = dynamic(
+  () => import("@/components/dashboard/DashboardShell"),
+  { ssr: false }
+);
 
 export default function DashboardLayout({
   children,

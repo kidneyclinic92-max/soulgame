@@ -2,10 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
-import WalletButton from "@/components/web3/WalletButton";
 import { useUser } from "@/context/UserContext";
+
+const WalletButton = dynamic(
+  () => import("@/components/web3/WalletButton"),
+  { ssr: false }
+);
 
 const navLinks = [
   { name: "Home", href: "/#hero" },
