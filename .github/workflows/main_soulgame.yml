@@ -30,19 +30,18 @@ jobs:
           npm install
           npm run build
 
-      - name: Verify standalone output
+      - name: Package standalone as zip
         run: |
-          echo "=== Standalone directory ==="
-          ls -la .next/standalone/
-          echo "=== .next inside standalone ==="
-          ls -la .next/standalone/.next/
-          echo "=== public inside standalone ==="
-          ls -la .next/standalone/public/ | head -10
+          cd .next/standalone
+          zip -r ../../deploy.zip .
+          cd ../..
+          echo "=== Zip contents (first 30 entries) ==="
+          zipinfo deploy.zip | head -30
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'soulgame'
           slot-name: 'Production'
-          package: .next/standalone
+          package: deploy.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2337E5DBC86E4CC4B850C6BA315F7184 }}
