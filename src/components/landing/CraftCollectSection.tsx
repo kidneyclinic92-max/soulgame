@@ -36,7 +36,7 @@ export default function CraftCollectSection() {
     <section
       ref={sectionRef}
       id="craft-collect"
-      className="relative py-20 md:py-28 bg-surface-950 overflow-hidden"
+      className="relative py-20 md:py-28 bg-surface-950 overflow-x-hidden"
     >
       {/* Background image */}
       <div className="absolute inset-0" aria-hidden>
@@ -83,7 +83,7 @@ export default function CraftCollectSection() {
         </div>
 
         {/* Video container – below the text, larger with transparent border */}
-        <div className="relative rounded-xl overflow-hidden border-4 border-brand-500/50 md:border-[6px] md:border-brand-400/60 bg-surface-900/30 aspect-video max-w-6xl mx-auto min-h-[280px] md:min-h-[360px]">
+        <div className="relative rounded-xl overflow-visible border-4 border-brand-500/50 md:border-[6px] md:border-brand-400/60 bg-surface-900/30 aspect-video w-full max-w-6xl mx-auto">
           <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
