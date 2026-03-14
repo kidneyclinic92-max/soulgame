@@ -10,7 +10,6 @@ export default function CraftCollectSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [videoError, setVideoError] = useState(false);
 
-  // Pause when section is off-screen to save CPU; play when in view
   useEffect(() => {
     const section = sectionRef.current;
     const video = videoRef.current;
@@ -36,7 +35,7 @@ export default function CraftCollectSection() {
     <section
       ref={sectionRef}
       id="craft-collect"
-      className="relative py-20 md:py-28 bg-surface-950 overflow-x-hidden"
+      className="relative py-20 md:py-28 bg-surface-950 overflow-hidden"
     >
       {/* Background image */}
       <div className="absolute inset-0" aria-hidden>
@@ -53,24 +52,20 @@ export default function CraftCollectSection() {
 
       <div className="container-custom relative z-10">
         <div className="max-w-2xl mx-auto text-center mb-12 md:mb-16">
-          {/* Subtitle – golden yellow */}
           <p className="text-amber-400 font-semibold text-lg mb-4">
             Craft Game Items, Collect NFTs, and Win Big!
           </p>
 
-          {/* Main heading – gradient */}
           <h2 className="font-hero font-bold tracking-tight text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
             <span className="bg-gradient-to-r from-brand-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
               Craft, Collect, and Win Big!
             </span>
           </h2>
 
-          {/* Paragraph – white */}
           <p className="text-white/90 text-base sm:text-lg leading-relaxed mb-8">
             Take part in crafting valuable game items, collecting exclusive NFTS, and uncovering rare land plots. Even non-gamers can play a key role in creating and gathering rewards. Plus, enjoy chances to win in our raffles, with prizes ranging from iPhones to Bitcoin, all from a prize pool of over $20,000. Don&apos;t miss out on exclusive NFT avatars and exciting rewards!
           </p>
 
-          {/* CTA – EOAS Game */}
           <a
             href="/games"
             className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold text-white
@@ -82,11 +77,11 @@ export default function CraftCollectSection() {
           </a>
         </div>
 
-        {/* Video container – below the text, larger with transparent border */}
-        <div className="relative rounded-xl overflow-visible border-4 border-brand-500/50 md:border-[6px] md:border-brand-400/60 bg-surface-900/30 aspect-video w-full max-w-6xl mx-auto">
+        {/* Video container */}
+        <div className="rounded-xl overflow-hidden border-4 border-brand-500/50 md:border-[6px] md:border-brand-400/60 bg-surface-900/30 w-full max-w-6xl mx-auto">
           <video
             ref={videoRef}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="block w-full h-auto"
             playsInline
             muted
             loop
@@ -98,8 +93,8 @@ export default function CraftCollectSection() {
             <source src={VIDEO_SRC} type="video/mp4" />
           </video>
           {videoError && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-surface-900 p-6 text-center">
-              <p className="text-surface-400 text-sm">Video couldn’t be loaded.</p>
+            <div className="flex flex-col items-center justify-center gap-2 bg-surface-900 p-6 text-center min-h-[200px]">
+              <p className="text-surface-400 text-sm">Video could not be loaded.</p>
               <p className="text-surface-500 text-xs max-w-md">
                 Add your file at <code className="bg-surface-800 px-1.5 py-0.5 rounded">public/assets/video5.mp4</code> (or update VIDEO_SRC in CraftCollectSection.tsx if your file has a different name).
               </p>
