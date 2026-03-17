@@ -39,5 +39,4 @@ next-env.d.ts
 .idea/
 
 # Large video files
-public/assets/header_video.mp4
 public/assets/background.mp4
