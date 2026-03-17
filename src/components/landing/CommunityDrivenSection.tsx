@@ -43,7 +43,7 @@ export default function CommunityDrivenSection() {
 
           {/* CTA – Join Discord */}
           <a
-            href="https://discord.gg/soulgaming"
+            href="https://discord.com/invite/P4TyH7XyWR"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold text-white mx-auto

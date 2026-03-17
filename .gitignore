@@ -37,3 +37,7 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+
+# Large video files
+public/assets/header_video.mp4
+public/assets/background.mp4

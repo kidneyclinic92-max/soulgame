@@ -45,7 +45,7 @@ export default function HeroSection() {
           preload="none"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          {videoInView && <source src="/assets/background.mp4" type="video/mp4" />}
+          {videoInView && <source src="/assets/header_video.mp4" type="video/mp4" />}
         </video>
         {/* Dark overlay on top of video for readability */}
         <div className="absolute inset-0 bg-surface-950/70" />

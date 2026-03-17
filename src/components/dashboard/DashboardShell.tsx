@@ -5,9 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Home,
-  Trophy,
-  BarChart3,
-  Users,
   Settings,
   LogOut,
   Bell,
@@ -15,10 +12,7 @@ import {
   Menu,
   X,
   Wallet,
-  Coins,
-  Sparkles,
   Layers,
-  Gamepad2,
 } from "lucide-react";
 import Logo from "@/components/Logo";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
@@ -26,13 +20,7 @@ import { useUser } from "@/context/UserContext";
 
 const navLinks = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
-  { name: "Earnings", href: "/dashboard/earnings", icon: Coins },
-  { name: "Play to Earn", href: "/dashboard/play-to-earn", icon: Sparkles },
   { name: "My Collection", href: "/dashboard/collection", icon: Layers },
-  { name: "My Games", href: "/dashboard/games", icon: Gamepad2 },
-  { name: "Tournaments", href: "/dashboard/tournaments", icon: Trophy },
-  { name: "Statistics", href: "/dashboard/stats", icon: BarChart3 },
-  { name: "Friends", href: "/dashboard/friends", icon: Users },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
@@ -93,7 +81,6 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-white truncate">{user?.username ?? "—"}</p>
-              <p className="text-xs text-brand-400 truncate">{user?.totalPoints ?? 0} SOUL pts</p>
             </div>
             <button onClick={logout} className="p-1 text-surface-500 hover:text-white transition-colors" title="Sign out">
               <LogOut className="w-4 h-4" />

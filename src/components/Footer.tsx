@@ -9,7 +9,7 @@ import Logo from "@/components/Logo";
 
 const socials = [
   { name: "Twitter", icon: Twitter, href: "#" },
-  { name: "Discord", icon: MessageCircle, href: "https://discord.gg/soulgaming" },
+  { name: "Discord", icon: MessageCircle, href: "https://discord.com/invite/P4TyH7XyWR" },
   { name: "Instagram", icon: Instagram, href: "#" },
   { name: "LinkedIn", icon: Linkedin, href: "#" },
   { name: "YouTube", icon: Youtube, href: "#" },
