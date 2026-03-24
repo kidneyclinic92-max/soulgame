@@ -67,13 +67,15 @@ export default function CraftCollectSection() {
           </p>
 
           <a
-            href="/games"
+            href="https://lootraiders.games"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold text-white
                        bg-gradient-to-r from-brand-500 via-purple-400 to-cyan-500
                        hover:from-brand-400 hover:to-cyan-400
                        shadow-lg shadow-brand-500/25 transition-all duration-300"
           >
-            EOAS Game
+            Join Giveaway
           </a>
         </div>
 
